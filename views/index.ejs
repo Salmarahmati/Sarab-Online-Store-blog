@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+    <%- include("partials/header.ejs") %>
+
+        <!---------- about ---------->
+        <div class="container first ">
+            <div class="row">
+
+                <div class="col-sm-6">
+
+                    <div class="about">
+                        <h3 class="welcome">Welcome to Sarab)</h3>
+                        <p>
+                            Here are our online store based in
+                            <strong> Herat, Afghanistan!</strong>
+                            We are delighted to offer you a curated selection of <strong> accessories</strong> to
+                            elevate your style and enhance your everyday life. Our collection includes a variety of
+                            jewelry
+                            pieces such as earrings, rings, and bracelets that are perfect for adding a touch of
+                            elegance to any outfit.
+                            In addition to jewelry, we also have a range of stylish cups, sunglasses
+                            , and other accessories to suit your needs. Whether you're looking for a statement
+                            piece to complete your look or a practical item for daily use, we have something for
+                            everyone.Thank you for choosing our online store for your accessory needs.We look forward to
+                            helping
+                            you find the perfect pieces to complement <strong> your unique style</strong>.
+                        </p>
+                    </div>
+
+                </div>
+                <div class="col-sm-6 ">
+                    <img class="instagram" src="images/instagram.jpg" alt="instagram">
+                </div>
+                <div class="latests">
+                    <img class="butterfly2" src="images/BlackButterfly.webp">
+                    <h3 class="latest"> Latest posts of Sarab </h3>
+                    <img class="butterfly3" src="images/butterfly2.webp">
+                </div>
+                <br>
+                <br>
+                <br>
+                <!--------    cards     ------->
+
+
+                <% posts.forEach(post=>{
+                    %>
+                    <div class="container  second">
+
+
+                        <div class="mycard">
+                            <div class="cimg">
+
+                                <% if (post.imagePath.startsWith('/uploads')) { %>
+                                    <img src="<%= post.imagePath %>" alt="<%= post.title %>" class="posts">
+                                    <% } else { %>
+                                        <img src="<%= post.image %>" alt="<%= post.title %>" class="posts">
+                                        <% } %>
+                                            <h6>
+                                                <%= post.title %>
+                                            </h6>
+
+                            </div>
+                            <div class="cdetail" data-id="<%= post.id %>">
+                                <p class="postTitle">
+                                    <%= post.description %>
+                                </p>
+
+                                <a class="btn" href="/edit-post/<%= post.id %>">Edit</a>
+
+                                <form action="/delete/<%= post.id %>" method="POST" class="del"
+                                    enctype="multipart/form-data">
+                                    <button type="submit" class="btn Delete" id="Id"> Delete</button>
+                                </form>
+
+
+                            </div>
+
+                        </div>
+                        <%}); %>
+                    </div>
+
+
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+        <%- include("partials/footer.ejs") %>
+</body>
+
+
+</html>
